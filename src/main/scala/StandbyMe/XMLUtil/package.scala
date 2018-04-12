@@ -28,7 +28,7 @@ package object XMLUtil {
 
     def cut(node__list: List[Node]): (Node, List[Node], List[Node]) = {
       val keynode = node__list.head
-      val (original_content_of_keynode, rest) = node__list.tail.span(!strategy(_))
+      val (original_content_of_keynode, rest) = node__list.drop(amount_of_descendants_of_node(keynode)).span(!strategy(_))
       val content_of_keynode = remove_children(original_content_of_keynode.filterNot(is_any_descendant_of_node_keynode))
       (keynode, content_of_keynode, rest)
     }
