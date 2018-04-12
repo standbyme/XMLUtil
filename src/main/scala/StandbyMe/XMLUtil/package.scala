@@ -38,11 +38,12 @@ package object XMLUtil {
         case Nil => result_buffer.toList
         case _ =>
           val (keynode, content_of_keynode, rest) = cut(node__list)
-          helper(result_buffer :+ (keynode, content_of_keynode), rest)
+          helper(result_buffer += ((keynode, content_of_keynode)), rest)
       }
     }
-    val (original_init,tail)=node__list.span(!strategy(_))
+
+    val (original_init, tail) = node__list.span(!strategy(_))
     val init = original_init.filterNot(is_any_descendant_of_node_keynode)
-    XMLSplitResult(init,helper(ListBuffer(),tail))
+    XMLSplitResult(init, helper(ListBuffer(), tail))
   }
 }
