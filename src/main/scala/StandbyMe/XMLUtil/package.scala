@@ -43,7 +43,7 @@ package object XMLUtil {
     }
 
     val (original_init, tail) = node__list.span(!strategy(_))
-    val init = original_init.filterNot(is_any_descendant_of_node_keynode)
+    val init = remove_children(original_init.filterNot(is_any_descendant_of_node_keynode))
     XMLSplitResult(init, helper(ListBuffer(), tail))
   }
 }
